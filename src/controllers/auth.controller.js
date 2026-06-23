@@ -46,7 +46,7 @@ async function userRegisterController(req, res) {
 async function userLoginController(req, res) {
     const { email, password} = req.body
 
-    const user = await userModel.findOne({email}).select('password')
+    const user = await userModel.findOne({ email }).select('+password')
 
     if(!user) {
         return res.status(401).json({
@@ -99,6 +99,16 @@ async function userLogoutController(req, res){
     })
 }
 
+async function getCurrentUserController(req, res) {
+    res.status(200).json({
+        user: {
+            _id: req.user._id,
+            name: req.user.name,
+            email: req.user.email
+        }
+    });
+}
+
 module.exports = {
-    userRegisterController, userLoginController, userLogoutController
+    userRegisterController, userLoginController, userLogoutController, getCurrentUserController
 }
