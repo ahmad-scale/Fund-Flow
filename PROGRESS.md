@@ -43,6 +43,7 @@ Fund-Flow (MERN Finance Management Application)
 * Accounts page created
 * Accounts API integration completed
 * Accounts list displayed successfully
+* Account creation functionality completed and tested
 
 ### Current Structure
 
@@ -62,35 +63,35 @@ src/
 
 ## Current Milestone
 
-Accounts Module Phase 2
+Accounts Module Phase 3
 
 ## Current Task
 
-Create New Account Functionality
+Display Account Balances
 
 Goals:
 
-* Add Create Account button
-* Call create account API
-* Refresh account list automatically
-* Verify new accounts appear immediately
+* Fetch account balance
+* Show balance for each account
+* Improve account card UI
+* Display real financial data per account
 
 ## Next Milestones
 
-1. Account Balance Display
-2. Transactions Module
-3. Fund Transfer functionality
-4. UI/UX improvements and responsiveness
+1. Transactions Module
+2. Fund Transfer functionality
+3. UI/UX improvements and responsiveness
 
 ## Notes
 
 * Authentication module is complete.
 * Dashboard displays real backend data.
 * Accounts page fetches and displays user accounts.
+* New accounts can be created from the frontend.
 * Axios automatically attaches JWT token.
 * Protected routes are working correctly.
 
 ## Last Updated
 
-Milestone: Accounts Module Phase 1 Completed
-Next Focus: Create Account Functionality
+Milestone: Accounts Module Phase 2 Completed
+Next Focus: Account Balance Display
