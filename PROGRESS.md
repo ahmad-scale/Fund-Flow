@@ -39,6 +39,7 @@ Fund-Flow (MERN Finance Management Application)
 * Protected Routes implemented and tested
 * Current User functionality implemented and tested
 * Logout functionality implemented and tested
+* Dashboard API integration completed and tested
 
 ### Current Structure
 
@@ -57,34 +58,34 @@ src/
 
 ## Current Milestone
 
-Dashboard API Integration
+Accounts Module
 
 ## Current Task
 
-Connect Dashboard to backend dashboard endpoint.
+Build Accounts Page
 
 Goals:
 
-* Fetch dashboard data from backend
-* Send JWT token with request
-* Display real dashboard information
-* Replace static dashboard page
+* Create Accounts page
+* Fetch user accounts
+* Display account list
+* Display account balances
+* Add navigation from dashboard
 
 ## Next Milestones
 
-1. Accounts Module
-2. Transactions Module
-3. Fund Transfer functionality
-4. UI/UX improvements and responsiveness
+1. Transactions Module
+2. Fund Transfer functionality
+3. UI/UX improvements and responsiveness
 
 ## Notes
 
 * Authentication module is complete.
-* Register, Login, Logout, Persistence and Route Protection are working.
-* Dashboard currently displays static data.
-* Dashboard API already exists on backend.
+* Dashboard displays real backend data.
+* Axios automatically attaches JWT token.
+* Protected routes are working correctly.
 
 ## Last Updated
 
-Milestone: Logout Functionality Completed
-Next Focus: Dashboard API Integration
+Milestone: Dashboard API Integration Completed
+Next Focus: Accounts Module
