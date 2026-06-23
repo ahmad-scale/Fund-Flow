@@ -36,13 +36,15 @@ Fund-Flow (MERN Finance Management Application)
 * User data storage implemented
 * Login persistence verified
 * Dashboard redirect after login implemented
+* Protected Routes implemented and tested
 
 ### Current Structure
 
 src/
 ├── Components/
 │   ├── Navbar.jsx
-│   └── Sidebar.jsx
+│   ├── Sidebar.jsx
+│   └── ProtectedRoute.jsx
 ├── Pages/
 │   ├── Dashboard.jsx
 │   ├── Login.jsx
@@ -53,27 +55,26 @@ src/
 
 ## Current Milestone
 
-Route Protection & Authentication Guard
+Current User Functionality
 
 ## Current Task
 
-Create Protected Routes
+Implement Current User Detection
 
 Goals:
 
-* Prevent unauthenticated users from accessing Dashboard
-* Redirect unauthenticated users to Login
-* Allow authenticated users to access protected pages
-* Prepare authentication architecture for future modules
+* Detect logged-in user automatically
+* Read stored user information
+* Verify user session on app startup
+* Prepare dashboard personalization
 
 ## Next Milestones
 
-1. Implement Current User functionality
-2. Connect Dashboard to backend data
-3. Build Accounts module
-4. Build Transactions module
-5. Build Fund Transfer functionality
-6. UI/UX improvements and responsiveness
+1. Connect Dashboard to backend data
+2. Build Accounts module
+3. Build Transactions module
+4. Build Fund Transfer functionality
+5. UI/UX improvements and responsiveness
 
 ## Notes
 
@@ -82,9 +83,10 @@ Goals:
 * JWT token persists after refresh.
 * User data persists after refresh.
 * Dashboard redirect is working.
+* Protected routes are working.
 * Dashboard is still a static Tailwind test page.
 
 ## Last Updated
 
-Milestone: Dashboard Redirect Completed
-Next Focus: Protected Routes
+Milestone: Protected Routes Completed
+Next Focus: Current User Functionality
