@@ -1,6 +1,6 @@
 const express = require('express')
 const authMiddleware = require('../middleware/auth.middleware')
-const accountController  = require('../controllers/account.controller')
+const accountController = require('../controllers/account.controller')
 
 const router = express.Router()
 
@@ -12,5 +12,7 @@ router.get('/', authMiddleware.authMiddleware, accountController.getUserAccountC
 
 //GET - api/accounts/balance/:accountId [Fetch account balance]
 router.get('/balance/:accountId', authMiddleware.authMiddleware, accountController.getAccountBalanceController)
+
+router.get('/:accountId', authMiddleware.authMiddleware, accountController.getAccountByIdController)
 
 module.exports = router

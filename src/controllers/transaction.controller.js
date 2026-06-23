@@ -9,21 +9,21 @@ async function createTransaction(req, res) {
 
 
     // 1.Validate Request
-    const {fromAccount, toAccount, amount, idempotencyKey} = req.body
+    const { fromAccount, toAccount, amount, idempotencyKey } = req.body
 
-    if(!fromAccount || !toAccount || amount === undefined || !idempotencyKey) {
+    if (!fromAccount || !toAccount || amount === undefined || !idempotencyKey) {
         return res.status(400).json({
             message: 'fromAccount, toAccount, amount, and idempotencyKey are required'
         })
     }
 
-    if(typeof amount !== 'number' || !Number.isFinite(amount) || amount <= 0) {
+    if (typeof amount !== 'number' || !Number.isFinite(amount) || amount <= 0) {
         return res.status(400).json({
             message: 'Amount must be a positive number'
         })
     }
 
-    if(fromAccount === toAccount) {
+    if (fromAccount === toAccount) {
         return res.status(400).json({
             message: 'Source and destination accounts must be different'
         })
@@ -38,13 +38,13 @@ async function createTransaction(req, res) {
         _id: toAccount
     })
 
-    if(!fromUserAccount) {
+    if (!fromUserAccount) {
         return res.status(403).json({
             message: 'You can only transfer funds from your own account'
         })
     }
 
-    if(!toUserAccount) {
+    if (!toUserAccount) {
         return res.status(400).json({
             message: 'Invalid destination account'
         })
@@ -55,27 +55,27 @@ async function createTransaction(req, res) {
         idempotencyKey: idempotencyKey
     })
 
-    if(isTransactionAlreadyExists){
-        if(isTransactionAlreadyExists.status === 'COMPLETED'){
+    if (isTransactionAlreadyExists) {
+        if (isTransactionAlreadyExists.status === 'COMPLETED') {
             return res.status(200).json({
                 message: 'Transaction already proceeded',
                 transaction: isTransactionAlreadyExists
             })
         }
 
-        if(isTransactionAlreadyExists.status === 'PENDING'){
+        if (isTransactionAlreadyExists.status === 'PENDING') {
             return res.status(200).json({
                 message: 'Transaction in process..'
             })
         }
 
-        if(isTransactionAlreadyExists.status === 'FAILED'){
+        if (isTransactionAlreadyExists.status === 'FAILED') {
             return res.status(200).json({
                 message: 'Transaction failed!'
             })
         }
 
-        if(isTransactionAlreadyExists.status === 'REVERSED'){
+        if (isTransactionAlreadyExists.status === 'REVERSED') {
             return res.status(200).json({
                 message: 'Transaction was reversed'
             })
@@ -84,10 +84,10 @@ async function createTransaction(req, res) {
 
     // 3.Check Account Status
 
-    if (fromUserAccount.status !== 'ACTIVE' || toUserAccount.status !== 'ACTIVE'){
+    if (fromUserAccount.status !== 'ACTIVE' || toUserAccount.status !== 'ACTIVE') {
         return res.status(400).json({
-                message: 'Both accounts must be active to process transaction'
-            })
+            message: 'Both accounts must be active to process transaction'
+        })
     }
 
     // 4.Derive sender balance from ledger
@@ -96,59 +96,59 @@ async function createTransaction(req, res) {
 
     // The system account issues funds and is intentionally allowed to carry a
     // negative balance. Customer accounts cannot be overdrawn.
-    if(!req.user.systemUser && balance < amount){
+    if (!req.user.systemUser && balance < amount) {
         return res.status(400).json({
             message: `Insufficient balance. Current balance is ${balance}. Requested amount is ${amount}`
         })
     }
-    
+
     let transaction;
 
-    try{
+    try {
 
-    // 5.Create Transaction [PENDING]
-    const session = await mongoose.startSession()
-    session.startTransaction()
+        // 5.Create Transaction [PENDING]
+        const session = await mongoose.startSession()
+        session.startTransaction()
 
-    const [transaction] = await transactionModel.create([{
-        fromAccount,
-        toAccount,
-        amount,
-        idempotencyKey,
-        status: 'PENDING'
-    }], { session })
+        const [transaction] = await transactionModel.create([{
+            fromAccount,
+            toAccount,
+            amount,
+            idempotencyKey,
+            status: 'PENDING'
+        }], { session })
 
-    await ledgerModel.create([{
-        account: fromAccount,
-        amount: amount,
-        transaction: transaction._id,
-        type: 'DEBIT'
-    }], {session})
+        await ledgerModel.create([{
+            account: fromAccount,
+            amount: amount,
+            transaction: transaction._id,
+            type: 'DEBIT'
+        }], { session })
 
-    await (() => {
-        return new Promise((resolve) => setTimeout(resolve, 15 * 1000))
-    })()
+        await (() => {
+            return new Promise((resolve) => setTimeout(resolve, 15 * 1000))
+        })()
 
-    await ledgerModel.create([{
-        account: toAccount,
-        amount: amount,
-        transaction: transaction._id,
-        type: 'CREDIT'
-    }], {session})
+        await ledgerModel.create([{
+            account: toAccount,
+            amount: amount,
+            transaction: transaction._id,
+            type: 'CREDIT'
+        }], { session })
 
-    await transactionModel.findOneAndUpdate(
-        { _id: transaction._id},
-        { status: 'COMPLETED'},
-        { session }
-    )
-
-    await session.commitTransaction()
-    session.endSession()
-
-    }catch(error){
         await transactionModel.findOneAndUpdate(
-            {idempotencyKey: idempotencyKey},
-            {status: 'FAILED'}
+            { _id: transaction._id },
+            { status: 'COMPLETED' },
+            { session }
+        )
+
+        await session.commitTransaction()
+        session.endSession()
+
+    } catch (error) {
+        await transactionModel.findOneAndUpdate(
+            { idempotencyKey: idempotencyKey },
+            { status: 'FAILED' }
         )
         return res.status(400).json({
             message: 'Transaction is Pending due to some issue, Please retry after some time'
@@ -156,23 +156,23 @@ async function createTransaction(req, res) {
     }
     // 10.Send Trasaction Notification
     await emailService.sendTransactionEmail(req.user.email, req.user.name, amount, toAccount)
-    
+
     return res.status(201).json({
         message: 'Transaction completed successfully',
         transaction
     })
 }
 
-async function createInitialFundsTransaction(req, res){
-    const { toAccount, amount, idempotencyKey} = req.body
+async function createInitialFundsTransaction(req, res) {
+    const { toAccount, amount, idempotencyKey } = req.body
 
-    if(!toAccount || amount === undefined || !idempotencyKey) {
+    if (!toAccount || amount === undefined || !idempotencyKey) {
         return res.status(400).json({
             message: 'toAccount, amount, and idempotencyKey are required'
         })
     }
 
-    if(typeof amount !== 'number' || !Number.isFinite(amount) || amount <= 0) {
+    if (typeof amount !== 'number' || !Number.isFinite(amount) || amount <= 0) {
         return res.status(400).json({
             message: 'Amount must be a positive number'
         })
@@ -182,7 +182,7 @@ async function createInitialFundsTransaction(req, res){
         _id: toAccount
     })
 
-    if(!toUserAccount) {
+    if (!toUserAccount) {
         return res.status(400).json({
             message: 'Invalid Account'
         })
@@ -192,7 +192,7 @@ async function createInitialFundsTransaction(req, res){
         user: req.user._id
     })
 
-    if(!fromUserAccount) {
+    if (!fromUserAccount) {
         return res.status(400).json({
             message: 'System user account not found!'
         })
@@ -207,14 +207,14 @@ async function createInitialFundsTransaction(req, res){
         amount,
         idempotencyKey,
         status: 'PENDING'
-    }], {session})
+    }], { session })
 
     await ledgerModel.create([{
         account: fromUserAccount._id,
         amount: amount,
         transaction: transaction._id,
         type: 'DEBIT'
-    }], {session})
+    }], { session })
 
     await ledgerModel.create([{
         account: toAccount,
@@ -235,5 +235,81 @@ async function createInitialFundsTransaction(req, res){
     })
 }
 
+async function getTransactions(req, res) {
+    const userAccounts = await accountModel.find({
+        user: req.user._id
+    });
 
-module.exports = { createTransaction, createInitialFundsTransaction }
+    const accountIds = userAccounts.map(acc => acc._id);
+
+    const transactions = await transactionModel
+        .find({
+            $or: [
+                { fromAccount: { $in: accountIds } },
+                { toAccount: { $in: accountIds } }
+            ]
+        })
+        .sort({ createdAt: -1 })
+        .populate('fromAccount')
+        .populate('toAccount');
+
+    res.status(200).json({
+        transactions
+    });
+}
+
+async function getTransactionById(req, res) {
+    const { id } = req.params;
+
+    const transaction = await transactionModel
+        .findById(id)
+        .populate('fromAccount')
+        .populate('toAccount');
+
+    if (!transaction) {
+        return res.status(404).json({
+            message: 'Transaction not found'
+        });
+    }
+
+    res.status(200).json({
+        transaction
+    });
+}
+
+async function getAccountLedger(req, res) {
+    const { accountId } = req.params;
+
+    const account = await accountModel.findOne({
+        _id: accountId,
+        user: req.user._id
+    });
+
+    if (!account) {
+        return res.status(404).json({
+            message: 'Account not found'
+        });
+    }
+
+    const ledgerEntries = await ledgerModel
+        .find({ account: accountId })
+        .populate('transaction')
+        .sort({ _id: -1 });
+
+    const balance = await account.getBalance();
+
+    res.status(200).json({
+        accountId,
+        balance,
+        entries: ledgerEntries
+    });
+}
+
+
+module.exports = {
+    createTransaction, 
+    createInitialFundsTransaction,
+    getTransactions,
+    getTransactionById,
+    getAccountLedger
+}
