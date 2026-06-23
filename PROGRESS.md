@@ -31,6 +31,10 @@ Fund-Flow (MERN Finance Management Application)
 * Authentication service created (`services/Authapi.js`)
 * CORS configured successfully
 * Register API integration completed and tested
+* Login API integration completed and tested
+* JWT token storage implemented
+* User data storage implemented
+* Login persistence verified
 
 ### Current Structure
 
@@ -52,37 +56,33 @@ Authentication Flow
 
 ## Current Task
 
-Connect Login page to backend login API.
+Dashboard Redirect After Login
 
 Goals:
 
-* Add form state
-* Handle form submission
-* Call loginUser()
-* Verify successful backend response
-* Display/log returned data
+* Redirect to Dashboard after successful login
+* Verify navigation works
+* Prepare for Protected Routes
 
 ## Next Milestones
 
-1. Store JWT token after login
-2. Redirect user to Dashboard
-3. Create Protected Routes
-4. Implement Current User functionality
-5. Connect Dashboard to backend data
-6. Build Accounts module
-7. Build Transactions module
-8. Build Fund Transfer functionality
-9. UI/UX improvements and responsiveness
+1. Create Protected Routes
+2. Implement Current User functionality
+3. Connect Dashboard to backend data
+4. Build Accounts module
+5. Build Transactions module
+6. Build Fund Transfer functionality
+7. UI/UX improvements and responsiveness
 
 ## Notes
 
-* Tailwind is working correctly.
-* Dashboard route is working correctly.
-* Register flow is working successfully.
-* Login page is currently UI-only.
-* loginUser(), registerUser(), and getCurrentUser() already exist in Authapi.js.
+* Register flow is fully working.
+* Login flow is fully working.
+* JWT token persists after refresh.
+* User data persists after refresh.
+* Dashboard is still a static Tailwind test page.
 
 ## Last Updated
 
-Milestone: Register API Integration Completed
-Next Focus: Login API Integration
+Milestone: JWT Storage & Login Persistence Completed
+Next Focus: Dashboard Redirect
