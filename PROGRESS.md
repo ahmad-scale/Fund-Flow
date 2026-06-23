@@ -38,6 +38,7 @@ Fund-Flow (MERN Finance Management Application)
 * Dashboard redirect after login implemented
 * Protected Routes implemented and tested
 * Current User functionality implemented and tested
+* Logout functionality implemented and tested
 
 ### Current Structure
 
@@ -56,38 +57,34 @@ src/
 
 ## Current Milestone
 
-Logout Functionality
+Dashboard API Integration
 
 ## Current Task
 
-Implement Logout System
+Connect Dashboard to backend dashboard endpoint.
 
 Goals:
 
-* Clear JWT token
-* Clear stored user data
-* Redirect user to Login
-* Verify protected routes block access after logout
+* Fetch dashboard data from backend
+* Send JWT token with request
+* Display real dashboard information
+* Replace static dashboard page
 
 ## Next Milestones
 
-1. Connect Dashboard to backend data
-2. Build Accounts module
-3. Build Transactions module
-4. Build Fund Transfer functionality
-5. UI/UX improvements and responsiveness
+1. Accounts Module
+2. Transactions Module
+3. Fund Transfer functionality
+4. UI/UX improvements and responsiveness
 
 ## Notes
 
-* Register flow is fully working.
-* Login flow is fully working.
-* JWT token persists after refresh.
-* User data persists after refresh.
-* Dashboard redirect is working.
-* Protected routes are working.
-* Dashboard displays logged-in user.
+* Authentication module is complete.
+* Register, Login, Logout, Persistence and Route Protection are working.
+* Dashboard currently displays static data.
+* Dashboard API already exists on backend.
 
 ## Last Updated
 
-Milestone: Current User Functionality Completed
-Next Focus: Logout Functionality
+Milestone: Logout Functionality Completed
+Next Focus: Dashboard API Integration
