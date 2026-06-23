@@ -45,6 +45,9 @@ Fund-Flow (MERN Finance Management Application)
 * Accounts list displayed successfully
 * Account creation functionality completed and tested
 * Account balance display completed and tested
+* Transactions page created
+* Transactions API integration completed
+* Transaction history displayed successfully
 
 ### Current Structure
 
@@ -57,26 +60,27 @@ src/
 │   ├── Dashboard.jsx
 │   ├── Login.jsx
 │   ├── Register.jsx
-│   └── Accounts.jsx
+│   ├── Accounts.jsx
+│   └── Transactions.jsx
 ├── services/
 │   ├── api.js
 │   └── Authapi.js
 
 ## Current Milestone
 
-Transactions Module Phase 1
+Transactions Module Phase 2
 
 ## Current Task
 
-Build Transactions Page
+Improve Transaction Cards
 
 Goals:
 
-* Create Transactions page
-* Add route
-* Connect Transactions API
-* Display transaction history
-* Show real transaction data
+* Show transaction date
+* Show source account
+* Show destination account
+* Improve transaction UI
+* Display more useful transaction information
 
 ## Next Milestones
 
@@ -89,11 +93,11 @@ Goals:
 * Authentication module is complete.
 * Dashboard displays real backend data.
 * Accounts page displays real balances.
-* New accounts can be created from the frontend.
+* Transactions page displays real transaction history.
 * Axios automatically attaches JWT token.
 * Protected routes are working correctly.
 
 ## Last Updated
 
-Milestone: Accounts Module Phase 3 Completed
-Next Focus: Transactions Module Phase 1
+Milestone: Transactions Module Phase 1 Completed
+Next Focus: Transactions Module Phase 2
