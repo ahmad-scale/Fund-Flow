@@ -37,6 +37,7 @@ Fund-Flow (MERN Finance Management Application)
 * Login persistence verified
 * Dashboard redirect after login implemented
 * Protected Routes implemented and tested
+* Current User functionality implemented and tested
 
 ### Current Structure
 
@@ -55,18 +56,18 @@ src/
 
 ## Current Milestone
 
-Current User Functionality
+Logout Functionality
 
 ## Current Task
 
-Implement Current User Detection
+Implement Logout System
 
 Goals:
 
-* Detect logged-in user automatically
-* Read stored user information
-* Verify user session on app startup
-* Prepare dashboard personalization
+* Clear JWT token
+* Clear stored user data
+* Redirect user to Login
+* Verify protected routes block access after logout
 
 ## Next Milestones
 
@@ -84,9 +85,9 @@ Goals:
 * User data persists after refresh.
 * Dashboard redirect is working.
 * Protected routes are working.
-* Dashboard is still a static Tailwind test page.
+* Dashboard displays logged-in user.
 
 ## Last Updated
 
-Milestone: Protected Routes Completed
-Next Focus: Current User Functionality
+Milestone: Current User Functionality Completed
+Next Focus: Logout Functionality
