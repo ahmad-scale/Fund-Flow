@@ -33,6 +33,8 @@
 * Transaction Creation
 * Auto Refresh
 * Detailed Transaction Records
+* Improved Transaction Cards
+* Transaction Counter
 
 ### Navigation & Layout ✅
 
@@ -41,30 +43,48 @@
 * Navigation Between Pages
 * Sidebar Logout
 
+### UI Improvements ✅
+
+* Dashboard Cards
+* Account Cards
+* Transaction Cards
+* Quick Actions
+* Counters
+
 ## Current Milestone
 
-Transactions UI Improvements
+Responsive Design Phase
 
 ## Current Task
 
-Improve Transaction Cards
+Make UI Mobile-Friendly
 
 Goals:
 
-* Better transaction cards
-* Better status visibility
-* Better amount display
-* Cleaner transaction history
+* Responsive dashboard cards
+* Responsive sidebar behavior
+* Responsive account cards
+* Responsive transaction cards
+* Better mobile layout
 
-## Next Milestones
+## Future Milestones
 
-1. Responsive Design
-2. Loading States
-3. Error States
-4. Final UI Polish
-5. Project Completion Review
+### MVP Polish
+
+* Loading States
+* Error States
+* Empty States
+
+### Optional Advanced Features
+
+* Transaction Detail Page
+* Ledger View
+* Charts & Analytics
+* Dark Mode
+* Profile Settings
+* Account Status Management
 
 ## Last Updated
 
-Milestone: Accounts UI Improvements Completed
-Next Focus: Transactions UI Improvements
+Milestone: Transactions UI Improvements Completed
+Next Focus: Responsive Design Phase
