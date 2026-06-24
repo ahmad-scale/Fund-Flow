@@ -5,8 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon server.js",
-    "start": "node server.js"
+    "dev": "node scripts/dev.js",
+    "server:dev": "nodemon server.js",
+    "client:dev": "npm run dev --prefix fundflow-frontend",
+    "build": "npm install --prefix fundflow-frontend && npm run build --prefix fundflow-frontend",
+    "start": "node server.js",
+    "deploy": "npm run build && npm start",
+    "site": "npm run dev"
   },
   "keywords": [],
   "author": "Ahmad",
