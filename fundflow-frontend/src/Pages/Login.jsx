@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { loginUser } from "../services/Authapi";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 export default function Login() {
@@ -50,7 +50,7 @@ export default function Login() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-slate-100">
-      <div className="bg-white p-8 rounded-xl shadow-lg w-96">
+      <div className="w-full max-w-md rounded-xl bg-white p-8 shadow-lg">
         <h1 className="text-3xl font-bold mb-6 text-center">
           Login
         </h1>
@@ -87,6 +87,16 @@ export default function Login() {
           </button>
 
         </form>
+
+        <div className="mt-6 text-center text-sm text-slate-600">
+          Don't have an account?{" "}
+          <Link
+            to="/register"
+            className="font-semibold text-blue-600 underline-offset-4 hover:text-blue-700 hover:underline"
+          >
+            Create one
+          </Link>
+        </div>
       </div>
     </div >
   );

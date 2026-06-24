@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { registerUser } from "../services/Authapi";
 
 
@@ -80,6 +81,16 @@ export default function Register() {
                         Register
                     </button>
                 </form>
+
+                <div className="mt-6 text-center text-sm text-slate-600">
+                    Already have an account?{" "}
+                    <Link
+                        to="/login"
+                        className="font-semibold text-blue-600 underline-offset-4 hover:text-blue-700 hover:underline"
+                    >
+                        Login
+                    </Link>
+                </div>
             </div>
         </div>
     );
