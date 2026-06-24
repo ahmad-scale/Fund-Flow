@@ -1,7 +1,11 @@
 import { useState } from "react";
 import { loginUser } from "../services/Authapi";
+import { useNavigate } from "react-router-dom";
+
 
 export default function Login() {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -20,9 +24,20 @@ export default function Login() {
     try {
       const data = await loginUser(formData);
 
+      localStorage.setItem("token", data.token);
+
+      console.log(localStorage.getItem("token"));
+      console.log(localStorage.getItem("user"));
+
+      localStorage.setItem(
+        "user",
+        JSON.stringify(data.user)
+      );
+
       console.log(data);
 
       alert("Login Successful");
+      navigate("/dashboard");
     } catch (error) {
       console.error(error);
 
